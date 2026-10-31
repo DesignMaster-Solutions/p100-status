@@ -2,11 +2,12 @@
 
 Teletext resurrected as a public service-status desk for a small software agency.
 
-**Stage: preparation, not a functioning app or a submitted entry.** This repository
-contains a build brief, observed API fixtures and acceptance cases. No application
-code has been generated with Kiro yet. The implementation must be developed using
+**Stage: executable feed preflight, not a functioning web app or a submitted entry.**
+This repository contains a build brief, observed API fixtures, acceptance cases and
+a tested Node.js feed probe. No application code has been generated with Kiro yet. The implementation must be developed using
 Kiro, with its actual specs, steering, hooks and test evidence retained in `.kiro/`.
-These preparation documents were written with Codex; they are not Kiro artifacts.
+The preparation documents and feed probe were written with Codex; they are not Kiro
+artifacts. The probe is a development reference, not sufficient use of Kiro to qualify.
 
 ## Why it exists
 
@@ -36,7 +37,32 @@ an endorsement. The MIT license covers original project material, not vendor mar
 4. Publish and exercise the app on the real test devices, record a demo under three
    minutes and complete the Devpost form only after the eligibility/terms gate.
 
-No `npm install`, `npm test`, local server or deployment exists at this stage.
+## Runnable feed preflight (Node.js 22+)
+
+No dependency installation, API key or paid API is required:
+
+```sh
+node --test test/feed-probe.test.mjs
+node tools/feed-probe.mjs --fixtures
+node tools/feed-probe.mjs --live
+```
+
+`--fixtures` is labeled historical. `--live` fetches the six fixed manifest URLs in
+parallel with five-second aborts and exits 1 if any request or schema fails. A vendor
+reporting an outage is valid data, not a probe transport failure. Every result includes
+its source, base page, retrieval time and separate upstream update time. No server is
+started and no automatic polling is installed.
+
+The exported `normalizeFeed` and `probeAll` functions preserve all component IDs,
+distinguish missing incidents from an empty list, keep unknown statuses non-green,
+and accept an optional in-memory previous result for explicitly stale responses.
+Stale data retains its original retrieval timestamp; a failed source cannot erase
+other vendors. This is a backend reference for Kiro, not a rendered teletext UI.
+
+Eleven tests cover the data/failure boundary. The `cell-bounds` acceptance case,
+component pagination, Worker cache and browser interactions remain unimplemented.
+See [preflight evidence](docs/preflight-evidence.md) for observed live results.
+No web deployment exists at this stage.
 
 ## Competition and eligibility
 
