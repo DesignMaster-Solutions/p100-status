@@ -2,7 +2,7 @@
 
 Teletext resurrected as a public service-status desk for a small software agency.
 
-**Stage: executable feed preflight, not a functioning web app or a submitted entry.**
+**Stage: executable feed preflight and pagination reference, not a functioning web app or a submitted entry.**
 This repository contains a build brief, observed API fixtures, acceptance cases and
 a tested Node.js feed probe. No application code has been generated with Kiro yet. The implementation must be developed using
 Kiro, with its actual specs, steering, hooks and test evidence retained in `.kiro/`.
@@ -42,9 +42,10 @@ an endorsement. The MIT license covers original project material, not vendor mar
 No dependency installation, API key or paid API is required:
 
 ```sh
-node --test test/feed-probe.test.mjs
+node --test test/*.test.mjs
 node tools/feed-probe.mjs --fixtures
 node tools/feed-probe.mjs --live
+node tools/component-pages.mjs
 ```
 
 `--fixtures` is labeled historical. `--live` fetches the six fixed manifest URLs in
@@ -59,8 +60,16 @@ and accept an optional in-memory previous result for explicitly stale responses.
 Stale data retains its original retrieval timestamp; a failed source cannot erase
 other vendors. This is a backend reference for Kiro, not a rendered teletext UI.
 
-Eleven tests cover the data/failure boundary. The `cell-bounds` acceptance case,
-component pagination, Worker cache and browser interactions remain unimplemented.
+Seventeen tests cover the data/failure boundary and reference pagination, including
+100 deterministic generated Unicode/control-character cases. The paginator keeps
+all components and incident titles across 40x24 ASCII grids, preserving the original
+text and source metadata separately for a future accessible detail view. The historical
+Cloudflare fixture requires 28 subpages for 481 components; all 67 affected components
+precede operational ones. This command does not fetch current status.
+See [pagination contract and evidence](docs/pagination.md).
+The application index/about pages, accessible detail view, Worker cache, browser
+rendering and interactions remain unimplemented. Kiro must build those and integrate
+or replace this explicitly Codex-authored reference with real Kiro usage evidence.
 See [preflight evidence](docs/preflight-evidence.md) for observed live results.
 No web deployment exists at this stage.
 
