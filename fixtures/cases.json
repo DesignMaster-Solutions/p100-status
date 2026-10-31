@@ -1,0 +1,103 @@
+[
+  {
+    "id": "cloudflare-affected-without-incidents",
+    "input": "live/cloudflare.json",
+    "expect": {
+      "vendorIndicator": "major",
+      "affectedComponents": 67,
+      "incidentCount": 0,
+      "allAffectedVisibleAcrossSubpages": true,
+      "basePage": 102
+    }
+  },
+  {
+    "id": "openai-missing-incidents",
+    "input": "live/openai.json",
+    "expect": {
+      "incidentAvailability": "unknown",
+      "vendorIndicator": "none",
+      "preserveComponents": true,
+      "throws": false,
+      "basePage": 103
+    }
+  },
+  {
+    "id": "github-empty-incidents",
+    "input": "live/github.json",
+    "expect": {
+      "incidentAvailability": "known",
+      "incidentCount": 0,
+      "basePage": 101
+    }
+  },
+  {
+    "id": "provider-timeout",
+    "input": {
+      "provider": "github",
+      "error": "timeout",
+      "cached": null
+    },
+    "expect": {
+      "label": "NO SIGNAL",
+      "basePage": 101,
+      "otherProvidersRemainVisible": true,
+      "green": false
+    }
+  },
+  {
+    "id": "stale-provider",
+    "input": {
+      "provider": "github",
+      "error": "timeout",
+      "cachedFixture": "live/github.json",
+      "retrievedAt": "2026-10-31T15:00:00Z",
+      "now": "2026-10-31T15:05:00Z"
+    },
+    "expect": {
+      "stale": true,
+      "ageSeconds": 300,
+      "retrievedAt": "2026-10-31T15:00:00Z"
+    }
+  },
+  {
+    "id": "unknown-status",
+    "input": {
+      "provider": "github",
+      "payload": {
+        "status": {
+          "indicator": "new_vendor_value"
+        },
+        "components": [],
+        "incidents": []
+      }
+    },
+    "expect": {
+      "label": "UNKNOWN",
+      "green": false
+    }
+  },
+  {
+    "id": "malformed-body",
+    "input": {
+      "provider": "github",
+      "raw": "<html>upstream failure</html>"
+    },
+    "expect": {
+      "label": "NO SIGNAL",
+      "throws": false,
+      "green": false
+    }
+  },
+  {
+    "id": "cell-bounds",
+    "input": {
+      "generated": "arbitrary Unicode, control characters, long labels and any number of components"
+    },
+    "expect": {
+      "rowsPerPage": 24,
+      "cellsPerRow": 40,
+      "uniqueStablePageNumbers": true,
+      "noExecutableProviderHTML": true
+    }
+  }
+]

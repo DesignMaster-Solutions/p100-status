@@ -1,0 +1,79 @@
+[
+  {
+    "id": "github",
+    "name": "GitHub",
+    "url": "https://www.githubstatus.com/api/v2/summary.json",
+    "captured_at": "2026-10-31T15:19:35.499272+00:00",
+    "http_status": 200,
+    "file": "fixtures/live/github.json",
+    "sha256": "2ae32ee9ce1fad11988517d2d859d4fe2d7362e3614dc978ec981ee33a56b4f1",
+    "components": 12,
+    "incidents": 0,
+    "indicator": "none"
+  },
+  {
+    "id": "cloudflare",
+    "name": "Cloudflare",
+    "url": "https://www.cloudflarestatus.com/api/v2/summary.json",
+    "captured_at": "2026-10-31T15:19:35.499583+00:00",
+    "http_status": 200,
+    "file": "fixtures/live/cloudflare.json",
+    "sha256": "5703ef513a51af159e88bd328dce72d4509c211daea2afa9414fdc2eace276c3",
+    "components": 481,
+    "incidents": 0,
+    "indicator": "major"
+  },
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "url": "https://status.openai.com/api/v2/summary.json",
+    "captured_at": "2026-10-31T15:19:43.770649+00:00",
+    "http_status": 200,
+    "capture_error": "Initial strict shape check failed: incidents field absent; raw response captured successfully on second request",
+    "file": "fixtures/live/openai.json",
+    "sha256": "1704677c7f4f473d397bb9ff064ea1bb8e466b8b90a7f335fb43d21659eb2558",
+    "top_level_types": {
+      "page": "dict",
+      "status": "dict",
+      "components": "list"
+    },
+    "components": 25,
+    "indicator": "none"
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "url": "https://status.anthropic.com/api/v2/summary.json",
+    "captured_at": "2026-10-31T15:19:35.499774+00:00",
+    "http_status": 200,
+    "file": "fixtures/live/anthropic.json",
+    "sha256": "d8f034a71578bec6803c808234f2268853c01214500f83b510425dcc00fb453e",
+    "components": 6,
+    "incidents": 0,
+    "indicator": "none"
+  },
+  {
+    "id": "vercel",
+    "name": "Vercel",
+    "url": "https://www.vercel-status.com/api/v2/summary.json",
+    "captured_at": "2026-10-31T15:19:35.499823+00:00",
+    "http_status": 200,
+    "file": "fixtures/live/vercel.json",
+    "sha256": "fc91c6e3033e9294a9662a985e7ce002bde65b3f8a3204131cc86a1e0b390c5c",
+    "components": 67,
+    "incidents": 0,
+    "indicator": "none"
+  },
+  {
+    "id": "discord",
+    "name": "Discord",
+    "url": "https://discordstatus.com/api/v2/summary.json",
+    "captured_at": "2026-10-31T15:19:35.499861+00:00",
+    "http_status": 200,
+    "file": "fixtures/live/discord.json",
+    "sha256": "a9f4058c1d2c2c9fdd53e3d78248ec10b36f306ddf17577713d9935f06de1dff",
+    "components": 33,
+    "incidents": 0,
+    "indicator": "none"
+  }
+]
