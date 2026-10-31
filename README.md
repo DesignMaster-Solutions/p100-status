@@ -2,7 +2,7 @@
 
 Teletext resurrected as a public service-status desk for a small software agency.
 
-**Stage: executable feed preflight and pagination reference, not a functioning web app or a submitted entry.**
+**Stage: executable feed, pagination and local HTTP reference, not a functioning web app or a submitted entry.**
 This repository contains a build brief, observed API fixtures, acceptance cases and
 a tested Node.js feed probe. No application code has been generated with Kiro yet. The implementation must be developed using
 Kiro, with its actual specs, steering, hooks and test evidence retained in `.kiro/`.
@@ -67,11 +67,25 @@ text and source metadata separately for a future accessible detail view. The his
 Cloudflare fixture requires 28 subpages for 481 components; all 67 affected components
 precede operational ones. This command does not fetch current status.
 See [pagination contract and evidence](docs/pagination.md).
-The application index/about pages, accessible detail view, Worker cache, browser
+The application index/about pages, accessible detail view, Cloudflare Worker cache, browser
 rendering and interactions remain unimplemented. Kiro must build those and integrate
 or replace this explicitly Codex-authored reference with real Kiro usage evidence.
 See [preflight evidence](docs/preflight-evidence.md) for observed live results.
 No web deployment exists at this stage.
+
+## Local HTTP reference
+
+`node tools/pages-api.mjs` serves `GET http://127.0.0.1:8789/api/pages`.
+It uses the existing probe and paginator, with a 60-second in-memory cache,
+coalesced refreshes and explicit failure states. `P100_PORT` changes the local port.
+No installation, authentication, paid calls or background polling is required.
+Six additional tests exercise cache expiry, concurrent reads, stale-data expiry,
+response isolation and actual HTTP success/failure routes (23 total tests).
+See [HTTP contract and measured evidence](docs/http-reference.md).
+
+This is a **Node.js development reference**, not a deployed Worker. Kiro still
+needs to implement the application and its runtime-specific cache. The local
+server does not establish eligibility or a completed competition submission.
 
 ## Competition and eligibility
 
