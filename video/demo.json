@@ -1,0 +1,113 @@
+{
+  "brand": "P100 · Design Master Solutions LLC · Kiroween 2026",
+  "voice": "Samantha",
+  "rate": 186,
+  "bg": "#0b0b0d",
+  "accent": "#0f0",
+  "out": "../docs/demo.mp4",
+  "scenes": [
+    {
+      "title": "P100 — Teletext, resurrected",
+      "lines": [
+        "Broadcast teletext (Ceefax / Oracle), 1974-2012",
+        "Revived as a live status desk",
+        "Design Master Solutions LLC · Resurrection"
+      ],
+      "say": "P100 brings back broadcast teletext, the nineteen eighties TV text service, and puts it to work as a live status desk for the services a small software agency depends on. This is D M S T X T."
+    },
+    {
+      "title": "The problem",
+      "lines": [
+        "Six status pages, six layouts",
+        "Six clocks, six opinions",
+        "One index, one page per vendor"
+      ],
+      "shots": [
+        "../prints/2026-11-01-p100-desktop-index.png"
+      ],
+      "say": "When something breaks, we open six different vendor status pages and read them in whatever layout each one invented. P100 gives them one shelf: a numbered index, one page per vendor, all in the same forty column grid."
+    },
+    {
+      "title": "Live index",
+      "lines": [
+        "Page 100: vendors and status",
+        "Cloudflare MAJOR, page 102"
+      ],
+      "shots": [
+        "../prints/2026-11-01-p100-desktop-index.png"
+      ],
+      "say": "Page one hundred is the index. Every vendor gets a page number, its overall status and how old the source is. Right now Cloudflare is reporting a major incident, so it is red and blinking, and the vendor name stays readable while the status word flashes."
+    },
+    {
+      "title": "P102 · Cloudflare, 1 of 28",
+      "lines": [
+        "481 components, 65 affected",
+        "Affected first, then healthy",
+        "28 subpages, own page number"
+      ],
+      "shots": [
+        "../prints/2026-11-01-p100-desktop-p102.png"
+      ],
+      "say": "Page one zero two opens Cloudflare. Four hundred and eighty one components, sixty five affected. There are twenty eight subpages, and P100 never steals another vendor's page number to show them. Affected components come first, the healthy ones follow."
+    },
+    {
+      "title": "Honest by construction",
+      "lines": [
+        "Limits stated on P199",
+        "NO SIGNAL is not all-clear",
+        "An empty list is not zero"
+      ],
+      "shots": [
+        "../prints/2026-11-01-p100-desktop-p199.png"
+      ],
+      "say": "Page one nine nine states the limits on the page itself: vendor reports only, not active monitoring, no S L A. If a source fails or returns something unexpected, the page says no signal. And an empty incident list is never printed as an all clear."
+    },
+    {
+      "title": "The device it was built for",
+      "lines": [
+        "360 px to desktop, same grid",
+        "iPad mini, live right here",
+        "reduced motion: no flashing"
+      ],
+      "shots": [
+        "../prints/2026-11-01-p100-ipad-index.png"
+      ],
+      "say": "The grid scales from a three hundred and sixty pixel phone to a desktop, and it respects reduced motion: no flashing and no scanline animation. This is the app running live on an iPad mini."
+    },
+    {
+      "title": "How Kiro was used",
+      "lines": [
+        "Steering: product, tech, structure",
+        "Spec: EARS requirements, design, tasks",
+        "Hook: run the suite on every save",
+        "Exactly 20 tests, red before green"
+      ],
+      "say": "The application was built with Kiro's spec driven workflow. Steering documents pin the product boundary, the stack and the module layout. Then a spec in three parts: requirements written as EARS acceptance criteria, a design that fixes the grid rules and the fetch contract, and a task plan Kiro worked through to completion. A hook runs the whole suite every time a source file is saved."
+    },
+    {
+      "title": "Properties, not examples",
+      "lines": [
+        "fast-check: any generated feed, same rules",
+        "Pages are exactly 24 lines of 40 chars",
+        "A failing feed renders NO SIGNAL, never throws"
+      ],
+      "mono_cmd": "npm test",
+      "mono_cwd": "..",
+      "mono_grep": [
+        " ✓",
+        " Test Files",
+        "      Tests"
+      ],
+      "say": "The tests came before the code. Mutating the page builder turned the suite red, and the cases stayed red until the implementation was restored. Property based tests with fast check then hold the invariant: for any generated input every page is exactly twenty four lines of forty characters, page numbers stay unique, and a failing feed renders no signal without throwing."
+    },
+    {
+      "title": "P100 · live now",
+      "lines": [
+        "p100.designmaster.workers.dev",
+        "github.com/DesignMaster-Solutions/p100-status",
+        "Cloudflare Worker · TypeScript · MIT"
+      ],
+      "say": "P100 is live, the repository is public with the Kiro directory committed, and the whole thing runs on a Cloudflare Worker. Teletext went dark in the nineties. It still does its job."
+    }
+  ]
+}
