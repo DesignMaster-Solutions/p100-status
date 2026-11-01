@@ -1,118 +1,98 @@
-# P100
+# P100 — DMS-TXT
 
-Teletext resurrected as a public service-status desk for a small software agency.
+**Teletext resurrected as a live status desk for the internet services a small
+software agency depends on.**
 
-**Stage: executable feed, pagination and local HTTP reference, not a functioning web app or a submitted entry.**
-This repository contains a build brief, observed API fixtures, acceptance cases and
-a tested Node.js feed probe. No application code has been generated with Kiro yet. The implementation must be developed using
-Kiro, with its actual specs, steering, hooks and test evidence retained in `.kiro/`.
-The preparation documents and feed probe were written with Codex; they are not Kiro
-artifacts. The probe is a development reference, not sufficient use of Kiro to qualify.
+P100 brings back 1980s broadcast Teletext (Ceefax / Oracle style TV text pages) as a
+numbered status board. During an incident, opening six vendor status pages is slow. P100
+puts a readable index and the affected components behind numbered teletext pages you
+select with a remote or the keyboard. Every signal shows its source and the time it was
+retrieved; an unavailable source stays visibly **NO SIGNAL**, and `incidents = []` is never
+mistaken for an all-clear.
 
-## Why it exists
+## Kiroween 2026 — Resurrection
 
-During an incident, opening six separate vendor status pages is slow. P100 should
-put a readable index and the affected components behind numbered teletext pages.
-A remote, keyboard or touch selects a vendor. Every signal has a source and a
-retrieval time. An unavailable source stays visibly unknown.
+Category: **Resurrection** (bring dead technology back to life). The dead technology is
+broadcast Teletext; the revival is a live, data-driven status desk on the open web, built
+with Kiro's spec-driven workflow.
 
-## Build inputs
+## What it does
 
-- [Build brief](docs/build-brief.md): bounded first version and observable acceptance.
-- [Observed feed contract](docs/feed-contract.md): real differences that the adapter must handle.
-- [Acceptance cases](fixtures/cases.json): expected outcomes, not passing tests.
-- [Capture manifest](fixtures/manifest.json): URLs, UTC timestamps and SHA-256 hashes.
-- `fixtures/live/`: unmodified public API responses captured on 31 October 2026.
+- Fetches six fixed public **Atlassian Statuspage** `summary.json` feeds server-side, in
+  parallel, with a 5-second per-source timeout and a 60-second `caches.default` cache. No
+  API keys, no accounts, no persistence.
+- Converts them into teletext pages on a strict **40×24** character grid:
+  - **P100** — service index: each vendor with its page number, overall status and source
+    age.
+  - **P101** GitHub, **P102** Cloudflare, **P103** OpenAI, **P104** Anthropic,
+    **P105** Vercel, **P106** Discord — one base page per vendor listing components and any
+    active incidents. A vendor with many affected components spans subpages `n/N` and never
+    steals another vendor's number. Affected components are shown before operational ones.
+  - **P199** — sources and limitations.
+- Authentic front end: the 8 teletext colours, double-height header row with a live clock
+  (`P100 P100 DMS-TXT  Fri 30 Oct 14:31:07`), a blocky mosaic logo, a CRT scanline effect,
+  flashing text for MAJOR OUTAGE, page entry by digit keys and an on-screen remote (0–9 plus
+  the red/green/yellow/cyan fastext keys). It scales to 360 px wide and respects
+  `prefers-reduced-motion` (no flashing, no scanline animation).
 
-The snapshots are historical development fixtures, **not current service status**.
-They contain vendor-owned factual status data; vendor names are attribution, not
-an endorsement. The MIT license covers original project material, not vendor marks.
+This is a **vendor-status viewer**, not active monitoring, not an SLA calculator, and not a
+claim about any customer's availability.
 
-## Next construction session
+## How to run
 
-1. Authenticate Kiro with the existing project account and verify available free credits.
-2. Ask Kiro to read the brief and contract, then produce specs and implement the Worker.
-3. Turn every case in `fixtures/cases.json` into executable tests; observe the relevant
-   failure before applying the fix. Keep live network calls outside the unit suite.
-4. Publish and exercise the app on the real test devices, record a demo under three
-   minutes and complete the Devpost form only after the eligibility/terms gate.
-
-## Runnable feed preflight (Node.js 22+)
-
-No dependency installation, API key or paid API is required:
+Requires Node.js 22+.
 
 ```sh
-node --test test/*.test.mjs
-node tools/feed-probe.mjs --fixtures
-node tools/feed-probe.mjs --live
-node tools/component-pages.mjs
+npm install
+npm test            # vitest unit + fast-check property suite
+npx wrangler dev    # serves / and /api/pages locally on the Worker runtime
 ```
 
-`--fixtures` is labeled historical. `--live` fetches the six fixed manifest URLs in
-parallel with five-second aborts and exits 1 if any request or schema fails. A vendor
-reporting an outage is valid data, not a probe transport failure. Every result includes
-its source, base page, retrieval time and separate upstream update time. No server is
-started and no automatic polling is installed.
+- `GET /` — the teletext client (HTML, CSS and JS inline; no build step).
+- `GET /api/pages` — JSON of all teletext pages (`{ generatedAt, pages }`).
 
-The exported `normalizeFeed` and `probeAll` functions preserve all component IDs,
-distinguish missing incidents from an empty list, keep unknown statuses non-green,
-and accept an optional in-memory previous result for explicitly stale responses.
-Stale data retains its original retrieval timestamp; a failed source cannot erase
-other vendors. This is a backend reference for Kiro, not a rendered teletext UI.
+A red vendor status is valid data, not an error. A failed/slow source renders as NO SIGNAL
+while the other five keep working.
 
-Seventeen tests cover the data/failure boundary and reference pagination, including
-100 deterministic generated Unicode/control-character cases. The paginator keeps
-all components and incident titles across 40x24 ASCII grids, preserving the original
-text and source metadata separately for a future accessible detail view. The historical
-Cloudflare fixture requires 28 subpages for 481 components; all 67 affected components
-precede operational ones. This command does not fetch current status.
-See [pagination contract and evidence](docs/pagination.md).
-The accessible detail view, Cloudflare Worker cache, browser
-rendering and interactions remain unimplemented. Kiro must build those and integrate
-or replace this explicitly Codex-authored reference with real Kiro usage evidence.
-See [preflight evidence](docs/preflight-evidence.md) for observed live results.
-No web deployment exists at this stage.
+## How Kiro was used
 
-## Local HTTP reference
+The application in `src/`, the tests in `test/unit/` and everything in `.kiro/` were built
+with Kiro's spec-driven workflow:
 
-`node tools/pages-api.mjs` serves `GET http://127.0.0.1:8789/api/pages`.
-It uses the existing probe and paginator, with a 60-second in-memory cache,
-coalesced refreshes and explicit failure states. `P100_PORT` changes the local port.
-No installation, authentication, paid calls or background polling is required.
-Six additional tests exercise cache expiry, concurrent reads, stale-data expiry,
-response isolation and actual HTTP success/failure routes (23 total tests).
-See [HTTP contract and measured evidence](docs/http-reference.md).
+- **Steering** (`.kiro/steering/`): `product.md`, `tech.md`, `structure.md` pin the product
+  boundaries (vendor viewer, no keys, honest status), the stack (Cloudflare Worker,
+  TypeScript, no framework, pure `buildPages`), and the module layout.
+- **Spec** (`.kiro/specs/p100/`): `requirements.md` states acceptance criteria in EARS form
+  (WHEN/WHILE/IF … THE SYSTEM SHALL …); `design.md` fixes the data model, the 40×24 grid
+  rules and the fetch/cache contract; `tasks.md` is the checkbox plan that was worked
+  through to completion.
+- **Pure core**: `buildPages(feeds, now)` in `src/pages.ts` and `normalizeFeed` in
+  `src/feeds.ts` take no I/O and no hidden clock, so they are directly unit-testable.
+- **Tests, red before green**: the eight acceptance cases in `fixtures/cases.json` are
+  encoded in `test/unit/feeds.test.ts` and `test/unit/pages.test.ts`. Mutating the builder
+  (forcing one subpage; treating unknown incidents as green) was observed to turn them red
+  before the correct implementation turned them green.
+- **Property-based tests** (`test/unit/properties.test.ts`, fast-check): for ANY generated
+  feed input every page is exactly 24 lines of 40 characters, vendor page numbers are unique
+  and stable for the same service order, and unknown/failed feeds render NO SIGNAL and never
+  throw.
+- **Agent hook** (`.kiro/hooks/run-tests-on-save.kiro.hook`): runs `npm test` whenever a
+  `src/*.ts` file is saved, keeping the grid bounds and status rules honest during
+  development.
 
-This is a **Node.js development reference**, not a deployed Worker. Kiro still
-needs to implement the application and its runtime-specific cache. The local
-server does not establish eligibility or a completed competition submission.
+### Provenance
 
-## Competition and eligibility
+`tools/` and `docs/` are earlier Codex-authored preparation (a Node.js feed probe,
+paginator and local HTTP reference) and are labelled as such in those files. They informed
+the contract; the Kiro-built, Worker-deployable application is `src/` + `.kiro/` +
+`test/unit/`. The live `summary.json` snapshots in `fixtures/live/` were captured on
+31 October 2026 and are historical development fixtures, not current service status.
 
-Target: Kiroween 2026, Resurrection. The official rules require a new functioning
-application built with Kiro, public GitHub source with a license and `.kiro/`, an
-English description, a public YouTube demonstration, and an explanation of Kiro use.
-Submission closes 4 December 2026 at 14:00 Pacific; results are expected around
-3 February 2027. Category prize: US$5,000; this is a possible award, not revenue.
+## Data and attribution
 
-The proposed entrant is Design Master Solutions LLC. Brazil-resident individuals
-are excluded; the organization must have an authorized eligible representative.
-The existing task names Rudy as that representative. Confirm authority and
-eligibility before submission; do not submit as Alan individually or claim a false
-residence. Contract acceptance and any identity/tax/payment details remain with Alan.
-
-Source, checked 31 October 2026: https://kiroween.devpost.com/rules
+The feeds carry vendor-owned factual status data. Vendor names are attribution, not an
+endorsement, and the MIT license covers original project material, not vendor marks.
 
 ## License
 
-Original project material: MIT, see [LICENSE](LICENSE).
-
-## Index and source-attribution reference
-
-The local API now adds `navigation`: P100 lists all six fixed vendor destinations,
-status and retrieval age; P199 documents source URLs and limitations. Existing
-`pages` remains vendor-only, preserving its contract. Both navigation pages use
-24 rows of 40 printable ASCII cells. A stale or unavailable vendor keeps its page
-number and original timestamp; incomplete upstream `NONE` is shown as CHECK DETAILS.
-Five additional tests bring the suite to 28. See [desk evidence](docs/desk-evidence.md).
-This remains Codex-authored preparation, not a Kiro-built UI or submitted entry.
+MIT, see [LICENSE](LICENSE). Copyright (c) 2026 Design Master Solutions LLC.

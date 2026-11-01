@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Run tests on source save",
+  "description": "Runs the vitest suite whenever a TypeScript source file under src/ is saved, so the 40x24 grid bounds, honest-status rules and property checks stay green while building P100.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/*.ts"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "npm test"
+  }
+}
