@@ -1,8 +1,8 @@
 # Kiroween 2026 — submission package
 
 Everything a submitter needs to paste into https://kiroween.devpost.com/ (deadline
-2026-12-04 19:00 BRT). The only remaining actions are the two external logins
-(Google for the YouTube upload, Devpost for the form) and the captcha.
+2026-12-04 19:00 BRT). The video is public on YouTube; the only remaining action is the Devpost form
+(behind a reCAPTCHA image challenge).
 
 ## Fields
 
@@ -14,7 +14,7 @@ Everything a submitter needs to paste into https://kiroween.devpost.com/ (deadli
 | Built with | Cloudflare Workers, TypeScript, Vitest, fast-check, Kiro |
 | "Try it out" link | https://p100.designmaster.workers.dev |
 | GitHub repo | https://github.com/DesignMaster-Solutions/p100-status |
-| Video | `docs/demo.mp4` (2:37, narrated) — **needs the YouTube upload** |
+| Video | https://youtu.be/XWqBSConpNY (public; source `docs/demo.mp4`, 2:37, narrated) |
 | License | MIT, visible in the repo About box |
 | `/.kiro` committed | `.kiro/steering`, `.kiro/specs/p100`, `.kiro/hooks/run-tests-on-save.kiro.hook` |
 

@@ -18,7 +18,7 @@ with Kiro's spec-driven workflow.
 
 ## Demo
 
-`docs/demo.mp4` (2 min 37 s, narrated) shows the deployed app on a desktop and an iPad
+[Demo video on YouTube](https://youtu.be/XWqBSConpNY) (`docs/demo.mp4`, 2 min 37 s, narrated) shows the deployed app on a desktop and an iPad
 mini: the index with a live MAJOR, P102 paginating 481 Cloudflare components across 28
 subpages, P199 stating the limits, and the test suite. Scene list and narration live in
 `video/demo.json`; re-render with `demo_slides.py video/demo.json`. Submission fields,
