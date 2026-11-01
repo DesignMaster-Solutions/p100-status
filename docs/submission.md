@@ -1,9 +1,10 @@
 # Kiroween 2026 — submission package
 
-Everything a submitter needs to paste into https://kiroween.devpost.com/ (deadline
-2026-12-04 19:00 BRT). The demo video is public on YouTube. The Devpost entry has not
-been submitted: the DMS LLC representative and acceptance of the Official Rules require
-Alan's decision, and the form has a reCAPTCHA image challenge.
+Kiroween 2026 submission for P100 — DMS-TXT (deadline 2026-12-04 19:00 BRT).
+
+**Status:** Submitted. The Devpost status panel showed `SUBMITTED`; the public project
+page is https://devpost.com/software/p100-dms-txt and lists Kiroween 2026. The demo is
+public on YouTube at https://youtu.be/XWqBSConpNY.
 
 ## Fields
 
@@ -80,10 +81,11 @@ a claim about any customer's availability. P199 says so on the page itself.
   during the submission period, URL pasted into the form.
 - **Best Demo**: automatic, no extra step.
 
-## Remaining actions (not automatable here)
+## Optional bonus prizes
 
-1. Alan confirms the DMS LLC representative and accepts the Official Rules for the
-   company.
-2. Alan solves the Devpost reCAPTCHA. After those decisions, submit the fields above.
-   The public demo is already available at https://youtu.be/XWqBSConpNY (YouTube oEmbed
-   verified 2026-11-01).
+- **Social Blitz:** requires a public post starting with `#KiroweenHackathon26` and its
+  URL added to the submission.
+- **Bonus Blog:** requires a public post about Kiro and this project build, identifying
+  it as part of Kiroween 2026, with its URL added to the submission.
+
+The submission can be edited until the deadline to add eligible bonus materials.
