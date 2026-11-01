@@ -67,7 +67,7 @@ text and source metadata separately for a future accessible detail view. The his
 Cloudflare fixture requires 28 subpages for 481 components; all 67 affected components
 precede operational ones. This command does not fetch current status.
 See [pagination contract and evidence](docs/pagination.md).
-The application index/about pages, accessible detail view, Cloudflare Worker cache, browser
+The accessible detail view, Cloudflare Worker cache, browser
 rendering and interactions remain unimplemented. Kiro must build those and integrate
 or replace this explicitly Codex-authored reference with real Kiro usage evidence.
 See [preflight evidence](docs/preflight-evidence.md) for observed live results.
@@ -106,3 +106,13 @@ Source, checked 31 October 2026: https://kiroween.devpost.com/rules
 ## License
 
 Original project material: MIT, see [LICENSE](LICENSE).
+
+## Index and source-attribution reference
+
+The local API now adds `navigation`: P100 lists all six fixed vendor destinations,
+status and retrieval age; P199 documents source URLs and limitations. Existing
+`pages` remains vendor-only, preserving its contract. Both navigation pages use
+24 rows of 40 printable ASCII cells. A stale or unavailable vendor keeps its page
+number and original timestamp; incomplete upstream `NONE` is shown as CHECK DETAILS.
+Five additional tests bring the suite to 28. See [desk evidence](docs/desk-evidence.md).
+This remains Codex-authored preparation, not a Kiro-built UI or submitted entry.

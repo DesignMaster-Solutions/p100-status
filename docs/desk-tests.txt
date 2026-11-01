@@ -1,0 +1,36 @@
+✔ real snapshot preserves all 481 components, with all 67 affected first (3.57775ms)
+✔ long names and incidents continue without losing text or originals (0.324708ms)
+✔ unavailable, unknown and stale are never all clear; timestamps retained (0.101791ms)
+✔ missing incident data remains distinct from zero incidents (0.058792ms)
+✔ deterministic generated Unicode/control/HTML cases stay in ASCII cells (44.551459ms)
+✔ duplicate or missing component IDs retain each input record (0.099416ms)
+✔ index keeps vendor destinations and real freshness even on failure (0.76225ms)
+✔ empty, unknown and misleading success states never signal all clear (0.148125ms)
+✔ index rejects duplicate destinations and overflow instead of hiding vendors (0.183084ms)
+✔ HTTP service adds navigation without changing existing component pages (2.046542ms)
+✔ upstream NONE cannot conceal incomplete or affected data on index (0.106959ms)
+✔ Cloudflare retains every affected component despite zero incidents (2.507917ms)
+✔ missing incidents remain unknown while OpenAI components survive (0.342125ms)
+✔ empty incidents are explicitly known (0.46975ms)
+✔ unknown overall or component statuses never become green (0.10625ms)
+✔ malformed successful body is not a healthy empty provider (0.167041ms)
+✔ failed request preserves other providers and stable pages (9.916667ms)
+✔ failed refresh retains original successful timestamp with stale age (0.325875ms)
+✔ HTTP error and invalid JSON both fail visibly (0.235ms)
+✔ timeout aborts a pending fetch (14.591375ms)
+✔ an active incident prevents an all-clear even if overall indicator is none (0.118959ms)
+✔ cache from another source or future timestamp cannot rescue a failure (0.304916ms)
+✔ cache hit preserves fetch time and updates source age, refresh at TTL (2.78975ms)
+✔ concurrent cold requests share a single refresh (1.325416ms)
+✔ failure retains old timestamp, is never green, and expires stale data (1.068166ms)
+✔ returned results cannot corrupt the cache for later clients (0.207583ms)
+✔ HTTP routes reject arbitrary sources and writes before fetching (11.526875ms)
+✔ all failed sources are HTTP 503 with explicit unavailable data (2.670416ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 136.023584

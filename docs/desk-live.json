@@ -1,0 +1,138 @@
+{
+  "http": 200,
+  "checkedAt": "2026-11-01T04:36:31.016Z",
+  "index": {
+    "page": 100,
+    "key": "100/1",
+    "subpage": 1,
+    "total": 1,
+    "rows": [
+      "P100 SERVICE INDEX                      ",
+      "Vendor status, not customer uptime      ",
+      "                                        ",
+      "101 github OPERATIONAL                  ",
+      "    Source age: 0s                      ",
+      "                                        ",
+      "102 cloudflare MAJOR                    ",
+      "    Source age: 0s                      ",
+      "                                        ",
+      "103 openai CHECK DETAILS                ",
+      "    Source age: 0s                      ",
+      "                                        ",
+      "104 anthropic OPERATIONAL               ",
+      "    Source age: 0s                      ",
+      "                                        ",
+      "105 vercel OPERATIONAL                  ",
+      "    Source age: 0s                      ",
+      "                                        ",
+      "106 discord OPERATIONAL                 ",
+      "    Source age: 0s                      ",
+      "                                        ",
+      "                                        ",
+      "                                        ",
+      "100 Index | 101-106 Vendor | 199 About  "
+    ],
+    "entries": [
+      {
+        "page": 101,
+        "provider": "github",
+        "state": "success",
+        "label": "OPERATIONAL",
+        "green": true,
+        "source": "https://www.githubstatus.com/api/v2/summary.json",
+        "retrievedAt": "2026-11-01T04:36:30.773Z",
+        "ageSeconds": 0
+      },
+      {
+        "page": 102,
+        "provider": "cloudflare",
+        "state": "success",
+        "label": "MAJOR",
+        "green": false,
+        "source": "https://www.cloudflarestatus.com/api/v2/summary.json",
+        "retrievedAt": "2026-11-01T04:36:30.993Z",
+        "ageSeconds": 0
+      },
+      {
+        "page": 103,
+        "provider": "openai",
+        "state": "success",
+        "label": "CHECK DETAILS",
+        "green": false,
+        "source": "https://status.openai.com/api/v2/summary.json",
+        "retrievedAt": "2026-11-01T04:36:31.016Z",
+        "ageSeconds": 0
+      },
+      {
+        "page": 104,
+        "provider": "anthropic",
+        "state": "success",
+        "label": "OPERATIONAL",
+        "green": true,
+        "source": "https://status.anthropic.com/api/v2/summary.json",
+        "retrievedAt": "2026-11-01T04:36:30.889Z",
+        "ageSeconds": 0
+      },
+      {
+        "page": 105,
+        "provider": "vercel",
+        "state": "success",
+        "label": "OPERATIONAL",
+        "green": true,
+        "source": "https://www.vercel-status.com/api/v2/summary.json",
+        "retrievedAt": "2026-11-01T04:36:30.794Z",
+        "ageSeconds": 0
+      },
+      {
+        "page": 106,
+        "provider": "discord",
+        "state": "success",
+        "label": "OPERATIONAL",
+        "green": true,
+        "source": "https://discordstatus.com/api/v2/summary.json",
+        "retrievedAt": "2026-11-01T04:36:30.777Z",
+        "ageSeconds": 0
+      }
+    ],
+    "green": false
+  },
+  "sources": [
+    {
+      "page": 101,
+      "provider": "github",
+      "url": "https://www.githubstatus.com/api/v2/summary.json",
+      "retrievedAt": "2026-11-01T04:36:30.773Z"
+    },
+    {
+      "page": 102,
+      "provider": "cloudflare",
+      "url": "https://www.cloudflarestatus.com/api/v2/summary.json",
+      "retrievedAt": "2026-11-01T04:36:30.993Z"
+    },
+    {
+      "page": 103,
+      "provider": "openai",
+      "url": "https://status.openai.com/api/v2/summary.json",
+      "retrievedAt": "2026-11-01T04:36:31.016Z"
+    },
+    {
+      "page": 104,
+      "provider": "anthropic",
+      "url": "https://status.anthropic.com/api/v2/summary.json",
+      "retrievedAt": "2026-11-01T04:36:30.889Z"
+    },
+    {
+      "page": 105,
+      "provider": "vercel",
+      "url": "https://www.vercel-status.com/api/v2/summary.json",
+      "retrievedAt": "2026-11-01T04:36:30.794Z"
+    },
+    {
+      "page": 106,
+      "provider": "discord",
+      "url": "https://discordstatus.com/api/v2/summary.json",
+      "retrievedAt": "2026-11-01T04:36:30.777Z"
+    }
+  ],
+  "vendorPages": 38
+}

@@ -49,6 +49,43 @@ export function componentPages(feed) {
   return pages;
 }
 
+// Navigation is separate from vendor pages so existing API consumers stay compatible.
+export function deskPages(feeds) {
+  if(feeds.length>6) throw new Error('The desk supports at most six providers');
+  const seen=new Set();
+  const entries=feeds.map(feed=>{
+    if(!Number.isInteger(feed.page)||feed.page<101||feed.page>198||seen.has(feed.page))
+      throw new Error('Invalid or duplicate vendor page');
+    seen.add(feed.page);
+    return {page:feed.page,provider:feed.provider,state:feed.state,
+      label:feed.state==='unavailable'?'NO SIGNAL':feed.state==='stale'?'STALE':feed.label==='NONE'?(feed.green===true?'OPERATIONAL':'CHECK DETAILS'):feed.label??'UNKNOWN',
+      green:feed.state==='success'&&feed.green===true,source:feed.source??null,
+      retrievedAt:feed.retrievedAt??null,ageSeconds:feed.ageSeconds??null};
+  });
+  const make=(page,title,lines,extra)=>{
+    const rows=[row(`P${page} ${title}`),...lines.map(row)];
+    if(rows.length>23) throw new Error('Desk page overflow');
+    while(rows.length<23) rows.push(row(''));
+    rows.push(row('100 Index | 101-106 Vendor | 199 About'));
+    return {page,key:`${page}/1`,subpage:1,total:1,rows,...extra};
+  };
+  const indexLines=['Vendor status, not customer uptime',''];
+  for(const e of entries) {
+    indexLines.push(`${e.page} ${ascii(e.provider).slice(0,18)} ${e.label}`);
+    indexLines.push(`    Source age: ${e.ageSeconds===null?'NEVER':`${e.ageSeconds}s`}`);
+    indexLines.push('');
+  }
+  if(!entries.length) indexLines.push('NO SOURCES - status unknown');
+  const sources=entries.map(e=>({page:e.page,provider:e.provider,url:e.source,retrievedAt:e.retrievedAt}));
+  const aboutLines=['Public vendor reports only.','Not active monitoring or an SLA.','No claim about your customer uptime.',
+    'NO SIGNAL = request/schema failed.','STALE = last successful source data.','UNKNOWN does not mean operational.',
+    'Age is time since retrieval, not','time since the vendor last changed.','Missing incidents are not zero.',
+    'Full source URLs accompany this page.',''];
+  sources.forEach(s=>aboutLines.push(`${s.page} ${s.provider}: source in metadata`));
+  return [make(100,'SERVICE INDEX',indexLines,{entries,green:entries.length>0&&entries.every(e=>e.green)}),
+    make(199,'SOURCES AND LIMITS',aboutLines,{sources,green:false})];
+}
+
 async function main() {
   if(process.argv.length!==2) throw new Error('Usage: node tools/component-pages.mjs (historical fixtures only)');
   const providers=JSON.parse(await readFile(new URL('../fixtures/manifest.json',import.meta.url)));

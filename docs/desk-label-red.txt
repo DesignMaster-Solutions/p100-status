@@ -1,0 +1,38 @@
+✔ index keeps vendor destinations and real freshness even on failure (0.703792ms)
+✔ empty, unknown and misleading success states never signal all clear (0.123916ms)
+✔ index rejects duplicate destinations and overflow instead of hiding vendors (0.167459ms)
+✔ HTTP service adds navigation without changing existing component pages (1.973958ms)
+✖ upstream NONE cannot conceal incomplete or affected data on index (0.412167ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 89.757125
+
+✖ failing tests:
+
+test at test/desk-pages.test.mjs:38:1
+✖ upstream NONE cannot conceal incomplete or affected data on index (0.412167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'NONE'
+  - 'CHECK DETAILS'
+  
+      at TestContext.<anonymous> (file:///Users/alandebortolo/Dev/DesignMaster-USA/Hackathons/p100-status/test/desk-pages.test.mjs:40:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'NONE',
+    expected: 'CHECK DETAILS',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

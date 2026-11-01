@@ -3,7 +3,7 @@ import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 import {probeAll} from './feed-probe.mjs';
-import {componentPages} from './component-pages.mjs';
+import {componentPages, deskPages} from './component-pages.mjs';
 
 export function createPagesService(providers, {fetcher=fetch, now=()=>new Date(),
   ttlMs=60000, retryMs=5000, maxStaleMs=900000}={}) {
@@ -37,7 +37,7 @@ export function createPagesService(providers, {fetcher=fetch, now=()=>new Date()
       return {...feed,ageSeconds:age};
     });
     return {mode:'live-reference',checkedAt:at.toISOString(),cache:cached?'hit':'refresh',
-      degraded:current.some(f=>f.state!=='success'),feeds:current,pages:current.flatMap(componentPages)};
+      degraded:current.some(f=>f.state!=='success'),feeds:current,navigation:deskPages(current),pages:current.flatMap(componentPages)};
   }};
 }
 
