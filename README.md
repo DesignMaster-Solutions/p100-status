@@ -16,6 +16,14 @@ Category: **Resurrection** (bring dead technology back to life). The dead techno
 broadcast Teletext; the revival is a live, data-driven status desk on the open web, built
 with Kiro's spec-driven workflow.
 
+## Demo
+
+`docs/demo.mp4` (2 min 37 s, narrated) shows the deployed app on a desktop and an iPad
+mini: the index with a live MAJOR, P102 paginating 481 Cloudflare components across 28
+subpages, P199 stating the limits, and the test suite. Scene list and narration live in
+`video/demo.json`; re-render with `demo_slides.py video/demo.json`. Submission fields,
+description and "how Kiro was used" text: `docs/submission.md`.
+
 ## What it does
 
 - Fetches six fixed public **Atlassian Statuspage** `summary.json` feeds server-side, in
