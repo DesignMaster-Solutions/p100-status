@@ -1,8 +1,9 @@
 # Kiroween 2026 — submission package
 
 Everything a submitter needs to paste into https://kiroween.devpost.com/ (deadline
-2026-12-04 19:00 BRT). The video is public on YouTube; the only remaining action is the Devpost form
-(behind a reCAPTCHA image challenge).
+2026-12-04 19:00 BRT). The demo video is public on YouTube. The Devpost entry has not
+been submitted: the DMS LLC representative and acceptance of the Official Rules require
+Alan's decision, and the form has a reCAPTCHA image challenge.
 
 ## Fields
 
@@ -81,8 +82,8 @@ a claim about any customer's availability. P199 says so on the page itself.
 
 ## Remaining actions (not automatable here)
 
-1. Sign in to the Google account (info@designmastersolutions.com) → YouTube Studio →
-   upload `docs/demo.mp4` as public, title `P100 — Teletext, resurrected (Kiroween
-   2026 demo)`, description from the section above.
-2. Sign in to Devpost (same account, `designmastersolutions`) → Enter a Submission →
-   paste the fields above → captcha → submit.
+1. Alan confirms the DMS LLC representative and accepts the Official Rules for the
+   company.
+2. Alan solves the Devpost reCAPTCHA. After those decisions, submit the fields above.
+   The public demo is already available at https://youtu.be/XWqBSConpNY (YouTube oEmbed
+   verified 2026-11-01).
