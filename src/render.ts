@@ -58,7 +58,9 @@ export function renderHtml(result: BuildResult): string {
   .entry{color:var(--tt-cyan);min-height:1.4em;font-size:calc(var(--cell)*.95);}
   .err{color:var(--tt-red);}
   .hint{color:#888;font-size:calc(var(--cell)*.8);max-width:46ch;text-align:center;}
-  @media (max-width:420px){ :root{--cell:4.2vw;} }
+  /* 40 columns at ~0.62em per glyph need 24.8 cell-widths; 3.4vw leaves room
+     for the set padding at 320-420px instead of clipping the right edge. */
+  @media (max-width:420px){ :root{--cell:3.4vw;} }
   @media (prefers-reduced-motion: reduce){
     .flash{animation:none;opacity:1;}
     .screen::after{animation:none;opacity:.5;}
