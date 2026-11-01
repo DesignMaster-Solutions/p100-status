@@ -38,7 +38,7 @@ export function renderHtml(result: BuildResult): string {
   .c-white{color:var(--tt-white);} .c-blue{color:var(--tt-blue);}
   .c-magenta{color:var(--tt-magenta);}
   .flash{animation:flash 0.8s steps(1) infinite;}
-  @keyframes flash{50%{opacity:0.15;}}
+  @keyframes flash{50%{opacity:0.45;}}
   /* CRT scanlines + faint flicker overlay */
   .screen::after{content:"";position:absolute;inset:0;pointer-events:none;
     background:repeating-linear-gradient(to bottom,
@@ -126,9 +126,21 @@ export function renderHtml(result: BuildResult): string {
     screenEl.appendChild(header);
     for(var i=1;i<page.rows.length;i++){
       var span = document.createElement('span');
-      span.className = 'row ' + colourFor(page.rows[i]);
-      if(page.flashing && /MAJOR/.test(page.rows[i])) span.className += ' flash';
-      span.textContent = page.rows[i];
+      var line = page.rows[i];
+      span.className = 'row ' + colourFor(line);
+      // Flash only the status token: a blinking whole row hides the vendor name
+      // exactly when it matters most.
+      var m = page.flashing ? /(MAJOR|CRITICAL|NO SIGNAL)/.exec(line) : null;
+      if(m){
+        span.appendChild(document.createTextNode(line.slice(0, m.index)));
+        var token = document.createElement('span');
+        token.className = 'flash';
+        token.textContent = m[0];
+        span.appendChild(token);
+        span.appendChild(document.createTextNode(line.slice(m.index + m[0].length)));
+      } else {
+        span.textContent = line;
+      }
       screenEl.appendChild(span);
     }
     updateHeader(header);
